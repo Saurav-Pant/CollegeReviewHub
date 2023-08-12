@@ -23,7 +23,6 @@ const ReviewsPage: React.FC = () => {
       .get<{ reviews: Review[] }>("/api/Reviews")
       .then((response) => {
         setReviews(response.data.reviews);
-        console.log(response.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -32,7 +31,7 @@ const ReviewsPage: React.FC = () => {
       });
   }, []);
 
-
+  console.log(reviews)
   const filteredReviews =
     reviews?.filter((review) =>
       review.collegeName.toLowerCase().includes(searchTerm.toLowerCase())

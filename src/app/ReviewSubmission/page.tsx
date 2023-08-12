@@ -1,6 +1,6 @@
 "use client";
 import BackButton from "@/components/BackButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -8,13 +8,22 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 interface Review {
   collegeName: string;
   review: string;
+  user:string | null;
 }
 
 const ReviewSubmission: React.FC = () => {
+  const [ld,setld] = useState<string | null>("");
+  useEffect(()=>{
+    const id = localStorage.getItem("userId")
+    setld(id);
+  },[])
+
   const [reviewData, setReviewData] = useState<Review>({
     collegeName: "",
     review: "",
+    user:"",
   });
+
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -31,7 +40,6 @@ const ReviewSubmission: React.FC = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setLoading(false);
         if (data.success) {
           router.push("/Reviews");
@@ -74,7 +82,7 @@ const ReviewSubmission: React.FC = () => {
             placeholder="Enter the college name"
             value={reviewData.collegeName}
             onChange={(e) =>
-              setReviewData({ ...reviewData, collegeName: e.target.value })
+              setReviewData({ ...reviewData,user:ld, collegeName: e.target.value })
             }
           />
         </div>

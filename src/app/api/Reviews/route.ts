@@ -8,7 +8,6 @@ connectToDB();
 export async function GET(request: NextRequest) {
   try {
     const reviews = await Review.find().populate("user");
-
     const response = NextResponse.json({
       message: "Review fetched successfully",
       success: true,
@@ -31,7 +30,6 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { collegeName, review } = reqBody;
-    console.log(reqBody);
 
     const reviews = await Review.create({
       collegeName,
@@ -39,7 +37,6 @@ export async function POST(request: NextRequest) {
       User,
     });
 
-    console.log(reviews);
 
     const response = NextResponse.json({
       message: "Review created successfully!",

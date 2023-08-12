@@ -13,16 +13,16 @@ interface Review {
   review: string;
 }
 
-const ReviewsPage: React.FC = () => {
+const ReviewsPage: React.FC = ({props}:any) => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
 
   useEffect(() => {
+    const userid = localStorage.getItem("userId");
     axios
-      .get<{ reviews: Review[] }>("/api/users/Dashboard")
+      .get<{ reviews: Review[] }>(`/api/users/Dashboard?userId=${userid}`)
       .then((response) => {
         setReviews(response.data.reviews);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching reviews:", error);

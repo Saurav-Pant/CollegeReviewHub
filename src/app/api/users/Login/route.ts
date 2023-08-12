@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { username, password } = reqBody;
-    console.log(reqBody);
 
     const user = await User.findOne({ username });
     if (!user) {
@@ -20,7 +19,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("user exists");
 
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
@@ -56,7 +54,6 @@ export async function POST(request: NextRequest) {
     response.headers.set("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     response.headers.set("Access-Control-Allow-Headers", "Content-Type");
 
-    console.log(response);
 
     response.cookies.set("token", token, {
       httpOnly: true,

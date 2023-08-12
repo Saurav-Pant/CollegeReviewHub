@@ -23,11 +23,9 @@ const SignUp = () => {
 
     try {
       const response = await axios.post("/api/users/Signup", user);
-      console.log(response);
       setLoading(false);
       router.push("/Login");
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
