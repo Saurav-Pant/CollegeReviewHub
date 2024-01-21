@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/Context/AuthContext.js", "src/app/layout.jsx", "src/app/api/users/[id]/MyDashboard/Route.ts", "src/app/api/users/Login/route.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/Context/AuthContext.js", "src/app/layout.jsx", "src/app/api/Users/[id]/MyDashboard/Route.ts", "src/app/api/Users/Login/route.ts"],
   "exclude": ["node_modules"]
 }

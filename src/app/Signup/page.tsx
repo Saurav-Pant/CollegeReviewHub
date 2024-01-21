@@ -20,20 +20,32 @@ const SignUp = () => {
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
-      const response = await axios.post("/api/users/Signup", user);
-      console.log(response);
+      const response = await fetch("/api/Users/Signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const responseData = await response.json();
+      console.log(responseData);
+  
       setLoading(false);
       router.push("/Login");
-      router.refresh();
     } catch (error) {
-      console.log(error);
+      console.error("Error during signup:", error);
       setLoading(false);
     }
   };
+  
 
-  // Define animations
   const containerVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },

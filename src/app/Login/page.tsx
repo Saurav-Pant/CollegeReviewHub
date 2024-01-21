@@ -6,48 +6,49 @@ import Images from "@/components/Images";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useAuth } from "@clerk/nextjs";
 
 const Login = () => {
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
   const [loading, setLoading] = useState(false);
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
 
   const router = useRouter();
 
-  const handleLogIn = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLogIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setLoading(true);
-
-    fetch("api/users/Login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.success) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("username", data.user.username);
-          localStorage.setItem("userId", data.user._id);
-          console.log(data.user);
-        } else {
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.error("Error during login:", error);
+  
+    try {
+      const response = await fetch("api/Users/Login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
       });
+  
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        router.push("/")
+      } else {
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    } finally {
+      setLoading(false);
+    };
   };
-
+  
   const containerVariants = {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -72,14 +73,14 @@ const Login = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="username"
               >
-                Username
+                Email
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="text"
                 placeholder="Username"
-                onChange={(e) => setUser({ ...user, username: e.target.value })}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
             <div className="mb-4">

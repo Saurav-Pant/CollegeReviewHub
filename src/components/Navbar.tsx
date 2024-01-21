@@ -24,11 +24,8 @@ const Navbar = (props: Props) => {
   const handleLogOut = async () => {
     setLoading(true);
     try {
-      await axios.get("/api/users/Logout");
+      await axios.get("/api/Users/Logout");
       localStorage.removeItem("token");
-      localStorage.removeItem("username");
-      localStorage.removeItem("userId");
-
       setTimeout(() => {
         setLoading(false);
         router.push("/Login");

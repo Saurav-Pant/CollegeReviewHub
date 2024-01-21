@@ -1,18 +1,19 @@
-import connectToDB from "@/DB/db";
-import User from "@/models/User";
+import prisma from "@/libs/prismadb";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-connectToDB();
-
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { username, password } = reqBody;
-    console.log(reqBody);
+    const { email, password } = reqBody;
 
-    const user = await User.findOne({ username });
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
     if (!user) {
       return NextResponse.json(
         { error: "User does not exist" },
@@ -20,26 +21,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("user exists");
-
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
       return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
 
     const tokenData = {
-      id: user._id,
+      id: user.id,
       username: user.username,
       email: user.email,
     };
 
-    const token = await jwt.sign(
-      tokenData,
-      process.env.TOKEN_SECRET! || "defaultSecret",
-      {
-        expiresIn: "1d",
-      }
-    );
+    const tokenSecret = process.env.TOKEN_SECRET || "defaultSecret";
+    const token = await jwt.sign(tokenData, tokenSecret, {
+      expiresIn: "1d",
+    });
 
     const response = NextResponse.json(
       {
@@ -51,12 +47,6 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
 
-    response.headers.set("Access-Control-Allow-Origin", "*");
-    response.headers.set("Access-Control-Allow-Methods", "POST");
-    response.headers.set("Access-Control-Allow-Headers", "Content-Type");
-
-    console.log(response);
-
     response.cookies.set("token", token, {
       httpOnly: true,
     });
@@ -67,10 +57,7 @@ export async function POST(request: NextRequest) {
       { error: error.message },
       { status: 500 }
     );
-    // add CORS headers
-    response.headers.set("Access-Control-Allow-Origin", "*");
-    response.headers.set("Access-Control-Allow-Methods", "*");
-    response.headers.set("Access-Control-Allow-Headers", "*");
+
     return response;
   }
 }
