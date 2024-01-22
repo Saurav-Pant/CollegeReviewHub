@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useClerk } from "@clerk/nextjs";
+import Cookies from 'js-cookie';
 
 
 interface Review {
@@ -20,6 +21,8 @@ const ReviewSubmission: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { user } = useClerk();
+  const userId = Cookies.get('userId');
+
 
 
   const handleReview = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,8 +31,9 @@ const ReviewSubmission: React.FC = () => {
 
     const dataToSend = {
       ...reviewData,
-      creator:user?.firstName,
-      creatorImgUrl:user?.imageUrl
+      creator:user?.firstName || "",
+      creatorImgUrl:user?.imageUrl|| "",
+      userId
     };
 
     fetch("api/Reviews", {
@@ -46,6 +50,7 @@ const ReviewSubmission: React.FC = () => {
         if (data.success) {
           router.push("/Reviews");
           router.refresh();
+          console.log(data)
         }
       })
       .catch((error) => {

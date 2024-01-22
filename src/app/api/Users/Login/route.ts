@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
 
-    response.cookies.set("token", token, {
+    response.cookies.set("userId", tokenData.id, {
       httpOnly: true,
     });
 

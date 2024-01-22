@@ -30,46 +30,6 @@ To get started with CollegeReviewHub, follow these simple steps:
 4. **Access the App:** 
    Open your web browser and navigate to `http://localhost:3000`.
 
----
-
-<div align="center">
-
-<h2 align=center>Project Maintainers</h2> 
-<table align="center">
-  <tr>
-    <td align="center">
-      <a href="https://github.com/Saurav-Pant">
-        <img src="https://avatars.githubusercontent.com/u/103263909?v=4" width="100px" alt=""/>
-        <br />
-        <sub><b>Saurav-Pant</b></sub>
-      </a>
-    </td>
-     <td align="center">
-      <a href="https://github.com/Shyamtawli">
-        <img src="https://avatars.githubusercontent.com/u/104145978?v=4" width="100px" alt=""/>
-        <br />
-        <sub><b>Shyamtawli</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/hikmee">
-        <img src="https://avatars.githubusercontent.com/u/89774623?v=4" width="100px" alt=""/>
-        <br />
-        <sub><b>Hikmee</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/vaibhav-xt">
-        <img src="https://avatars.githubusercontent.com/u/90946899?v=4" width="100px" alt=""/>
-        <br />
-        <sub><b>vaibhav-xt</b></sub>
-      </a>
-    </td>
-  </tr>
-</table>
-</div>
-
----
 
 **Contributing:**
 Contributions are warmly welcomed! To contribute, please follow these steps:
