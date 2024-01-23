@@ -46,15 +46,20 @@ interface CreateUserRequest {
   }
   
   
-export const GET = async () => {
+  export const GET = async () => {
     try {
-        const Users = await prisma.user.findMany()
+        const Users = await prisma.user.findMany({
+            include: {
+                reviews: true,
+            },
+        });
 
         const response = NextResponse.json({
             message: "Data Got successfully",
             success: true,
             Users,
-          });
+        });
+
         return response;
     } catch (err) {
         return NextResponse.json({ message: "GET Error", err }, { status: 500 })

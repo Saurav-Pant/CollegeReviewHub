@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       message: "Review created successfully!",
       success: true,
+      Review
     });
     return response;
   } catch (error: any) {

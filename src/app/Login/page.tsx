@@ -38,7 +38,10 @@ const Login = () => {
   
       if (data.success) {
         console.log(data);
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.user.id);
+        console.log(data)
+
+
         router.push("/")
       } else {
       }
