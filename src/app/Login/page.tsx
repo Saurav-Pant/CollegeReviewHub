@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import BackButton from "@/components/BackButton";
@@ -20,7 +21,7 @@ const Login = () => {
   const handleLogIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
       const response = await fetch("api/Users/Login", {
         method: "POST",
@@ -29,16 +30,17 @@ const Login = () => {
         },
         body: JSON.stringify(user),
       });
-  
+
       if (!response.ok) {
         throw new Error("Login failed");
       }
-  
       const data = await response.json();
-  
+
       if (data.success) {
         console.log(data);
         localStorage.setItem("token", data.user.id);
+        localStorage.setItem("username", data.user.username);
+
         console.log(data)
 
 
@@ -51,7 +53,7 @@ const Login = () => {
       setLoading(false);
     };
   };
-  
+
   const containerVariants = {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },

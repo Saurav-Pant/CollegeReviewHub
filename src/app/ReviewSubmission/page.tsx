@@ -20,6 +20,8 @@ const ReviewSubmission: React.FC = () => {
   const router = useRouter();
   const { user } = useClerk();
   const userId = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+
 
   const handleReview = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ const ReviewSubmission: React.FC = () => {
 
     const dataToSend = {
       ...reviewData,
-      creator: user?.firstName || "",
+      creator: user?.firstName || username,
       creatorImgUrl: user?.imageUrl || "",
       userId
     };

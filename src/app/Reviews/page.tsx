@@ -7,6 +7,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import SplashScreen from "@/components/SplashScreen";
 import { useClerk } from "@clerk/clerk-react";
+import Profile from "@/Assets/profile.png"
 
 interface Review {
   _id: number;
@@ -75,11 +76,22 @@ const ReviewsPage: React.FC = () => {
                   >
                     {review.creator}
                   </h4>
-                  <img
-                    src={review.creatorImgUrl}
-                    alt="Creator"
-                    className="h-12 w-12 rounded-full absolute top-4 right-4 hover:h-14 hover:w-14 transition-all duration-300 ease-in-out delay-75"
-                  />
+
+                  {(review.creatorImgUrl == "") ? (
+                    <img
+                      src={Profile.src}
+                      alt="Creator"
+                      className="h-12 w-12 rounded-full absolute top-4 right-4 hover:h-14 hover:w-14 transition-all duration-300 ease-in-out delay-75"
+                    />
+
+                  ) : (
+                    <img
+                      src={review.creatorImgUrl}
+                      alt="Creator"
+                      className="h-12 w-12 rounded-full absolute top-4 right-4 hover:h-14 hover:w-14 transition-all duration-300 ease-in-out delay-75"
+                    />
+                  )
+                  }
                 </div>
 
                 <h2 className="text-xl font-semibold mb-2">
