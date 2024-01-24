@@ -1,37 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
-const SplashScreen: React.FC = () => {
-  const [showSplash, setShowSplash] = useState<boolean>(true);
-  const [showSplash1, setShowSplash1] = useState<boolean>(true);
+interface SplashScreenProps {
+  isLoading: boolean;
+}
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash1(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
+const SplashScreen: React.FC<SplashScreenProps> = ({ isLoading }) => {
   return (
     <>
-      {showSplash && (
+      {isLoading && (
         <div className="">
-          {showSplash1 && (
-            <div className="flex justify-center mb-6">
-              <input
-                type="text"
-                placeholder="Search for a college..."
-                className="border border-gray-300 rounded-lg py-2 px-4"
-              />
-            </div>
-          )}
+
+          <div className="flex justify-center mb-6">
+            <input
+              type="text"
+              placeholder="Search for a college..."
+              className="border border-gray-300 rounded-lg py-2 px-4"
+            />
+          </div>
           <motion.div
             className="grid gap-6 lg:grid-cols-3 md:grid-cols-2"
             style={{
@@ -56,11 +42,11 @@ const SplashScreen: React.FC = () => {
               >
                 <h2
                   className="text-xl font-semibold mb-2 bg-gray-300  h-4"
-                  style={{  width: "70%",borderRadius:"3px" }}
+                  style={{ width: "70%", borderRadius: "3px" }}
                 ></h2>
                 <p
                   className="bg-gray-300 h-4 mt-2"
-                  style={{ width: "30%" ,borderRadius:"3px"}}
+                  style={{ width: "30%", borderRadius: "3px" }}
                 ></p>
               </motion.div>
             ))}

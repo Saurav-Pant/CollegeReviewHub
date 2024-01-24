@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import BackButton from "@/components/BackButton";
 import Images from "@/components/Images";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
@@ -136,13 +135,13 @@ const SignUp = () => {
               </Link>
             </p>
           </div>
-          <div className="text-center mt-10">
+          {/* <div className="text-center mt-10">
             <Link href="/sign-in">
               <button className="bg-black text-white px-4 py-2 rounded-full">
                 Sign In with Google
               </button>
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
 

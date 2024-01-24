@@ -130,13 +130,13 @@ const Login = () => {
               </Link>
             </p>
           </div>
-          <div className="text-center mt-10">
+          {/* <div className="text-center mt-10">
             <Link href="/sign-up">
               <button className="bg-black text-white px-4 py-2 rounded-full">
                 Sign Up with Google
               </button>
             </Link>
-          </div>
+          </div> */}
         </motion.div>
       </div>
       <Images />

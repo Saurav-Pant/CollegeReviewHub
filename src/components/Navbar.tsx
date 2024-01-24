@@ -49,16 +49,16 @@ const Navbar = (props: Props) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Link href="/" className="text-2xl font-bold">
+          <Link href="/" className="sm:text-2xl font-bold text-xl">
             ReviewHub
           </Link>
         </motion.div>
 
-        <ul className="flex space-x-4 text-lg font-bold justify-center items-center">
+        <ul className="flex space-x-2 sm:text-lg sm:font-bold font-semibold justify-center items-center">
           {(token || userId) && (
               <>
                 <motion.li
-                  className="mr-8"
+                  className="sm:mr-8 mr-3"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -70,13 +70,12 @@ const Navbar = (props: Props) => {
                   </Link>
                 </motion.li>
                 <motion.li
-                  className=""
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link
                     href="/Dashboard"
-                    className="transition duration-300 ease-in-out hover:text-gray-700 pr-8"
+                    className="transition duration-300 ease-in-out hover:text-gray-700 sm:pr-8 pr-2"
                   >
                     Dashboard
                   </Link>
@@ -89,7 +88,7 @@ const Navbar = (props: Props) => {
                   >
                     {!loading ? (
                       <button
-                        className="bg-slate-950 hover:bg-slate-700 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+                        className="bg-slate-950 hover:bg-slate-700 text-white font-bold sm:py-2 sm:px-3 px-1 py-1 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
                         onClick={handleLogOut}
                       >
                         Logout

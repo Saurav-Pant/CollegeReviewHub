@@ -2,7 +2,7 @@
 import BackButton from "@/components/BackButton";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
+import {FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { motion } from "framer-motion";
 import SplashScreen from "@/components/SplashScreen";
@@ -45,9 +45,10 @@ const ReviewsPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen relative">
       {isLoading ? (
-        <SplashScreen />
+        <SplashScreen isLoading={isLoading} />
       ) : (
         <>
+
           <BackButton link="/" />
           <div className="flex justify-center mb-6">
             <input
@@ -98,17 +99,6 @@ const ReviewsPage: React.FC = () => {
                   {review.collegeName}
                 </h2>
                 <p className="text-gray-600">{review.review}</p>
-
-                {review.creator === user?.firstName ? (
-                  <div className="absolute bottom-4 right-4">
-                    <button className="text-white  bg-black p-2 rounded-lg mr-5 ">
-                      <FaEdit />
-                    </button>
-                    <button className="bg-red-600 text-white p-2 rounded-md">
-                      <FaTrash />
-                    </button>
-                  </div>
-                ) : null}
               </motion.div>
             ))}
           </div>

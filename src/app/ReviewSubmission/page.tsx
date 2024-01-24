@@ -19,8 +19,15 @@ const ReviewSubmission: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { user } = useClerk();
-  const userId = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
+
+  let userid: string | null = null; 
+  let username: string | null = null;
+
+  if (typeof window !== 'undefined') {
+    userid = localStorage.getItem("token");
+    username = localStorage.getItem("username");
+    console.log(user?.lastName)
+  }
 
 
   const handleReview = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,9 +38,9 @@ const ReviewSubmission: React.FC = () => {
       ...reviewData,
       creator: user?.firstName || username,
       creatorImgUrl: user?.imageUrl || "",
-      userId
+      userId: user?.lastName || userid
     };
-
+  
     fetch("api/Reviews", {
       method: "POST",
       headers: {
