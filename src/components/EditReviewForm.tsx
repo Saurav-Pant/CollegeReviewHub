@@ -16,8 +16,9 @@ export default function EditReview({ id, collegeName, review }: any) {
 
         try {
             setLoading(true);
-
-            const res = await fetch(`http://localhost:3000/api/Reviews/${id}`, {
+            const URL = "https://college-review-hub.vercel.app"
+            // const URL = "http://localhost:3000"; //deployment
+            const res = await fetch(`${URL}/api/Reviews/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -40,8 +41,8 @@ export default function EditReview({ id, collegeName, review }: any) {
     };
 
     return (
-        <div className="flex justify-center items-center h-[80vh] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black ">
-            <form className="flex flex-col gap-4 p-6 bg-white rounded-lg shadow-lg sm:w-96">
+        <div className="flex justify-center items-center h-[80vh] bg-white">
+            <form className="flex flex-col gap-4 p-6 bg-gray-100 rounded-lg shadow-lg sm:w-96">
                 <h1 className="text-center text-2xl font-bold mb-4">Edit Review</h1>
 
                 <input
