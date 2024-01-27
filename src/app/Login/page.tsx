@@ -7,6 +7,7 @@ import Images from "@/components/Images";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -40,6 +41,7 @@ const Login = () => {
         console.log(data);
         localStorage.setItem("token", data.user.id);
         localStorage.setItem("username", data.user.username);
+        Cookies.set("userId", data.user.id);
 
         console.log(data)
 
